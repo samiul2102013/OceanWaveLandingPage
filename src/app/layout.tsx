@@ -1,0 +1,44 @@
+import type { Metadata } from "next";
+import { Space_Grotesk, JetBrains_Mono, Hind_Siliguri } from "next/font/google";
+import "./globals.css";
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const hindSiliguri = Hind_Siliguri({
+  variable: "--font-bangla",
+  subsets: ["bengali"],
+  weight: ["400", "500", "600", "700"],
+});
+
+export const metadata: Metadata = {
+  title: "OceanEdge Technologies — Building technology for real-world needs",
+  description:
+    "OceanEdge Technologies develops focused digital products for everyday work and services in Bangladesh. Home of KaazDaak.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${hindSiliguri.variable} scroll-smooth antialiased`}
+    >
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+        {children}
+      </body>
+    </html>
+  );
+}

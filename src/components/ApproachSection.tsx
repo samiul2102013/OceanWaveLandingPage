@@ -60,7 +60,6 @@ export default function ApproachSection() {
         {/* Section Index Header */}
         <div className="flex flex-wrap items-center justify-between gap-4 pb-4 mb-10 border-b border-[var(--border)]">
           <div className="flex items-center gap-2 text-xs font-mono tracking-widest uppercase text-[var(--text-muted)]">
-            <span className="text-[var(--accent)] font-bold">SEC.03 //</span>
             <span>OUR APPROACH</span>
           </div>
           <span className="text-[10px] font-mono text-[var(--text-dim)] uppercase tracking-wider">

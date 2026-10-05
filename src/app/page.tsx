@@ -2,16 +2,23 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import AnnouncementTicker from "@/components/AnnouncementTicker";
 import AboutSection from "@/components/AboutSection";
-import FocusSection from "@/components/FocusSection";
 import ApproachSection from "@/components/ApproachSection";
 import ProductsSection from "@/components/ProductsSection";
 import CurrentFocusSection from "@/components/CurrentFocusSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import OceanBackgroundCanvas from "@/components/OceanBackgroundCanvas";
+import ScrollSpy from "@/components/ScrollSpy";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--accent)] selection:text-white">
+    <div className="relative min-h-screen flex flex-col text-[var(--foreground)] selection:bg-[var(--accent)] selection:text-white">
+      {/* Fixed animated video-style ocean canvas background */}
+      <OceanBackgroundCanvas />
+
+      {/* Automatic scroll URL spy for seamless history state updates */}
+      <ScrollSpy />
+
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -23,30 +30,27 @@ export default function Home() {
       {/* Global Header & Brand Navigation */}
       <Header />
 
-      {/* Main Page Flow */}
-      <main id="main-content" className="flex-1">
-        {/* Hero Section — OceanEdge First */}
+      {/* Main Page Flow — scrolling over fixed ocean canvas */}
+      <main id="main-content" className="flex-1 relative z-10">
+        {/* Hero Section — KaazDaak leads the page */}
         <Hero />
 
         {/* Persistent High-Contrast Announcement Strip */}
         <AnnouncementTicker />
 
-        {/* Section 01: About OceanEdge */}
-        <AboutSection />
-
-        {/* Section 02: Our Focus (Proposed Principles) */}
-        <FocusSection />
-
-        {/* Section 03: Our Approach (4-Step Sequence) */}
-        <ApproachSection />
-
-        {/* Section 04: Products (Dedicated KaazDaak Spotlight) */}
+        {/* Products (Dedicated KaazDaak Spotlight) */}
         <ProductsSection />
 
-        {/* Section 05: What We're Building Now */}
+        {/* What We're Building Now */}
         <CurrentFocusSection />
 
-        {/* Section 06: Contact & Business Inquiries */}
+        {/* About OceanEdge */}
+        <AboutSection />
+
+        {/* How We Build */}
+        <ApproachSection />
+
+        {/* Contact & Business Inquiries */}
         <ContactSection />
       </main>
 

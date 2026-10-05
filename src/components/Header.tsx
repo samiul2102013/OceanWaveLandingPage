@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { playTick, toggleSound } from "@/lib/sound";
 import { Volume2, VolumeX, Sun, Moon, Menu, X } from "lucide-react";
 
@@ -36,16 +38,19 @@ export default function Header() {
     setSoundOn(state);
   };
 
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+
   const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Approach", href: "#approach" },
-    { label: "Products", href: "#products" },
-    { label: "Contact", href: "#contact" },
+    { label: "KaazDaak", href: "/kaazdaak" },
+    { label: "About", href: onHome ? "#about" : "/#about" },
+    { label: "Approach", href: onHome ? "#approach" : "/#approach" },
+    { label: "Contact", href: onHome ? "#contact" : "/#contact" },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[var(--border)] bg-[var(--background)]/90 backdrop-blur-md transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
         <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Brand Wordmark & Technical Glyph */}
           <a
@@ -54,32 +59,16 @@ export default function Header() {
             className="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[var(--accent)] p-1 rounded-sm"
             aria-label="OceanEdge Technologies Home"
           >
-            {/* Geometric Monogram Glyph */}
-            <div className="w-8 h-8 flex items-center justify-center border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--foreground)] group-hover:border-[var(--accent)] transition-colors">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors"
-                aria-hidden="true"
-              >
-                {/* Wave edge abstraction */}
-                <path
-                  d="M3 16C6 16 7 12 10 12C13 12 14 16 17 16C19 16 20.5 14 21 13"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="square"
-                />
-                <path
-                  d="M3 8C6 8 7 4 10 4C13 4 14 8 17 8C19 8 20.5 6 21 5"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  strokeLinecap="square"
-                />
-                <circle cx="10" cy="12" r="1.5" fill="var(--accent)" />
-              </svg>
+            {/* Brand Monogram */}
+            <div className="w-10 h-10 shrink-0 flex items-center justify-center border border-[var(--border-strong)] bg-white overflow-hidden group-hover:border-[var(--accent)] transition-colors">
+              <Image
+                src="/oceanedge-mark.png"
+                alt=""
+                width={32}
+                height={19}
+                priority
+                className="w-8 h-auto object-contain"
+              />
             </div>
 
             <div className="flex flex-col">
@@ -90,7 +79,7 @@ export default function Header() {
                 </span>
               </span>
               <span className="text-[10px] font-mono tracking-widest text-[var(--text-dim)] uppercase hidden sm:block">
-                SYS // BD-2026 · DIGITAL UTILITIES
+                DIGITAL PRODUCTS FOR BANGLADESH
               </span>
             </div>
           </a>
@@ -118,7 +107,7 @@ export default function Header() {
             {/* Status indicator badge */}
             <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 border border-[var(--border)] bg-[var(--surface-subtle)] text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-wider">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>ACTIVE_DEV</span>
+              <span>KAAZDAAK · IN DEVELOPMENT</span>
             </div>
 
             {/* Tactile Audio Feedback Switch */}

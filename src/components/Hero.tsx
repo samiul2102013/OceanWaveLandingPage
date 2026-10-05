@@ -1,7 +1,8 @@
 "use client";
 
 import React from "react";
-import EdgeWaveformVisualizer from "./EdgeWaveformVisualizer";
+import Link from "next/link";
+import Image from "next/image";
 import { playTick } from "@/lib/sound";
 import { ArrowDownRight } from "lucide-react";
 
@@ -17,118 +18,88 @@ export default function Hero() {
 
   return (
     <section
-      aria-label="OceanEdge Technologies Hero"
-      className="relative pt-8 pb-16 sm:pt-14 sm:pb-24 border-b border-[var(--border)] overflow-hidden"
+      id="hero"
+      aria-label="KaazDaak by OceanEdge Technologies"
+      className="relative border-b border-[var(--border)] bg-gradient-to-b from-kd-mist via-kd-mist to-white overflow-hidden"
     >
-      {/* Subtle background tech grid */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-60 pointer-events-none" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Technical Metadata Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-6 mb-8 border-b border-[var(--border)] text-[11px] font-mono tracking-widest uppercase text-[var(--text-muted)]">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[var(--accent)]" />
-            <span className="font-semibold text-[var(--foreground)]">
-              OCEANEDGE TECHNOLOGIES
-            </span>
-            <span className="hidden md:inline font-bangla text-xs text-[var(--text-dim)] tracking-normal">
-              (ওশানএজ টেকনোলজিস)
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-[10px] text-[var(--text-dim)]">
-            <span className="hidden sm:inline">INDEX: OE-REF-01</span>
-            <span>COORD: 23.8103°N / 90.4125°E</span>
-            <span className="text-[var(--accent)] font-medium">PHASE: PROD_DEV</span>
-          </div>
-        </div>
-
-        {/* Main Hero Split Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Editorial Statement & Primary Messaging */}
-          <div className="lg:col-span-7 flex flex-col justify-between">
-            <div>
-              {/* Small Category Label */}
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-5 border border-[var(--border-strong)] bg-[var(--surface)] text-[11px] font-mono tracking-wider text-[var(--foreground)] uppercase">
-                <span className="w-1.5 h-1.5 rounded-none bg-[var(--accent)]" />
-                <span>OCEANEDGE TECHNOLOGIES</span>
-              </div>
-
-              {/* Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-[var(--foreground)] leading-[1.08] max-w-2xl">
-                Building technology for real-world needs.
-              </h1>
-
-              {/* Supporting Copy */}
-              <p className="mt-6 text-base sm:text-lg text-[var(--text-muted)] leading-relaxed max-w-xl font-normal">
-                OceanEdge Technologies is a technology company developing digital
-                products for everyday work and services. KaazDaak is our first
-                product, now in development.
-              </p>
-
-              {/* Call to Actions */}
-              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-                <a
-                  href="#products"
-                  onClick={(e) => handleScrollTo(e, "products")}
-                  className="group inline-flex items-center gap-3 px-5 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--accent)] transition-colors text-xs font-mono tracking-widest uppercase font-medium focus:outline-none focus:ring-2 focus:ring-[var(--accent)] active:translate-y-px"
-                >
-                  <span>Explore our products</span>
-                  <ArrowDownRight
-                    size={16}
-                    className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
-                  />
-                </a>
-
-                <a
-                  href="#about"
-                  onClick={(e) => handleScrollTo(e, "about")}
-                  className="inline-flex items-center gap-2 px-5 py-3.5 border border-[var(--border-strong)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--foreground)] transition-colors text-xs font-mono tracking-widest uppercase focus:outline-none focus:ring-1 focus:ring-[var(--foreground)] active:translate-y-px"
-                >
-                  <span>About OceanEdge</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Bottom Hardware Spec Strip */}
-            <div className="mt-12 pt-6 border-t border-[var(--border)] grid grid-cols-3 gap-4 text-[11px] font-mono">
-              <div className="space-y-1">
-                <div className="text-[var(--text-dim)] uppercase text-[10px]">
-                  01 / PURPOSE
-                </div>
-                <div className="text-[var(--foreground)] font-medium">
-                  Everyday Work
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[var(--text-dim)] uppercase text-[10px]">
-                  02 / DOMAIN
-                </div>
-                <div className="text-[var(--foreground)] font-medium">
-                  Bangladesh
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[var(--text-dim)] uppercase text-[10px]">
-                  03 / PIPELINE
-                </div>
-                <div className="text-[var(--foreground)] font-medium">
-                  KaazDaak (01)
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Original Interactive Waveform Synthesizer */}
+      <div className="relative w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 py-10 sm:py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Product messaging */}
           <div className="lg:col-span-5 flex flex-col">
-            <div className="mb-2 flex items-center justify-between text-[10px] font-mono text-[var(--text-dim)] uppercase tracking-wider">
-              <span>FIG. 00 // SIGNAL INTERACTION</span>
-              <span>LIVE RENDER</span>
+            {/* Small Category Label */}
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-6 border border-kd-navy/15 bg-white/70 text-[11px] font-mono tracking-wider text-kd-navy uppercase self-start">
+              <span className="w-1.5 h-1.5 rounded-none bg-kd-teal" />
+              <span>KAAZDAAK · LOCAL WORK MARKETPLACE</span>
             </div>
-            <EdgeWaveformVisualizer />
-            <div className="mt-2 text-[10px] font-mono text-[var(--text-dim)] leading-normal">
-              Interactive signal monitor: representing the friction-free edge
-              between software services and real-world trade.
+
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-tight text-kd-navy leading-[1.06] max-w-2xl">
+              Hire nearby help for everyday jobs.
+            </h1>
+
+            {/* Supporting Copy */}
+            <p className="mt-6 text-base sm:text-lg lg:text-xl text-kd-navy/70 leading-relaxed max-w-xl font-normal">
+              KaazDaak is a local work marketplace for Bangladesh. Post a task,
+              compare offers from workers nearby, hire the one you trust.
+            </p>
+
+            {/* Call to Actions */}
+            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
+              <Link
+                href="/kaazdaak"
+                onClick={() => playTick(800, 0.02)}
+                className="group inline-flex items-center gap-3 px-5 py-3.5 bg-kd-navy text-white hover:bg-kd-teal transition-colors text-xs font-mono tracking-widest uppercase font-medium focus:outline-none focus:ring-2 focus:ring-kd-teal active:translate-y-px"
+              >
+                <span>Explore KaazDaak</span>
+                <ArrowDownRight
+                  size={16}
+                  className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
+                />
+              </Link>
+
+              <a
+                href="#contact"
+                onClick={(e) => handleScrollTo(e, "contact")}
+                className="inline-flex items-center gap-2 px-5 py-3.5 border border-kd-navy/25 bg-white/60 hover:bg-white text-kd-navy transition-colors text-xs font-mono tracking-widest uppercase focus:outline-none focus:ring-1 focus:ring-kd-navy active:translate-y-px"
+              >
+                <span>Talk to us</span>
+              </a>
+            </div>
+
+            {/* Product Spec Strip */}
+            <div className="mt-10 pt-6 border-t border-kd-navy/10 grid grid-cols-3 gap-4 text-[11px] font-mono">
+              <div className="space-y-1">
+                <div className="text-kd-navy/50 uppercase text-[10px]">
+                  PRODUCT
+                </div>
+                <div className="text-kd-navy font-medium">KaazDaak</div>
+              </div>
+              <div className="space-y-1">
+                <div className="text-kd-navy/50 uppercase text-[10px]">
+                  MARKET
+                </div>
+                <div className="text-kd-navy font-medium">Bangladesh</div>
+              </div>
+              <div className="space-y-1">
+                <div className="text-kd-navy/50 uppercase text-[10px]">
+                  STATUS
+                </div>
+                <div className="text-kd-navy font-medium">In development</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: KaazDaak hero banner */}
+          <div className="lg:col-span-7">
+            <div className="border border-kd-navy/10 bg-white shadow-sm overflow-hidden">
+              <Image
+                src="/kaazdaak-hero.jpg"
+                alt="KaazDaak app screens with verified service providers and service categories"
+                width={2200}
+                height={1229}
+                priority
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>

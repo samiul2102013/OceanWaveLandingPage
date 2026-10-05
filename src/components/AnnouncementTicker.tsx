@@ -4,13 +4,12 @@ import React from "react";
 
 export default function AnnouncementTicker() {
   const tickerItems = [
-    "OCEANEDGE TECHNOLOGIES",
-    "FIRST PRODUCT IN DEVELOPMENT: KAAZDAAK (কাজডাক)",
-    "LOCAL WORK MARKETPLACE",
-    "DESIGNED FOR BANGLADESH",
-    "USEFUL BY DESIGN",
-    "STATUS: ACTIVE ENGINEERING",
-    "CORE PROTOCOL // ZERO VENTURE HYPE",
+    "KAAZDAAK · কাজডাক",
+    "LOCAL WORK MARKETPLACE FOR BANGLADESH",
+    "POST A TASK",
+    "HIRE SOMEONE NEARBY",
+    "BUILT MOBILE-FIRST",
+    "IN DEVELOPMENT",
   ];
 
   return (

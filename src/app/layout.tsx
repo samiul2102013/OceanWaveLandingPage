@@ -21,9 +21,9 @@ const hindSiliguri = Hind_Siliguri({
 });
 
 export const metadata: Metadata = {
-  title: "OceanEdge Technologies — Building technology for real-world needs",
+  title: "KaazDaak | Local work marketplace for Bangladesh",
   description:
-    "OceanEdge Technologies develops focused digital products for everyday work and services in Bangladesh. Home of KaazDaak.",
+    "KaazDaak is a local work marketplace for Bangladesh. Post a task, compare offers from workers nearby, and hire the person you trust. Built by OceanEdge Technologies.",
 };
 
 export default function RootLayout({

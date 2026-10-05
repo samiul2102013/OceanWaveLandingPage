@@ -1,131 +1,144 @@
 "use client";
 
 import React, { useState } from "react";
-import { playTick } from "@/lib/sound";
-import { Copy, Check, Send } from "lucide-react";
+import { Mail, MapPin, Send } from "lucide-react";
+
+const directEmail = "ocean.tech.edge@gmail.com";
+
+type Errors = { name?: string; email?: string; message?: string };
+type Status = "idle" | "sending" | "ok";
 
 export default function ContactSection() {
-  const [copied, setCopied] = useState(false);
-  const [senderName, setSenderName] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<Errors>({});
+  const [status, setStatus] = useState<Status>("idle");
 
-  const directEmail = "ocean.tech.edge@gmail.com";
-
-  const handleCopyEmail = () => {
-    playTick(900, 0.02);
-    navigator.clipboard.writeText(directEmail);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const validate = (): Errors => {
+    const next: Errors = {};
+    if (!name.trim()) next.name = "Please enter your name.";
+    if (!email.trim()) next.email = "Please enter your email.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
+      next.email = "Please enter a valid email address.";
+    if (!message.trim()) next.message = "Please enter a message.";
+    return next;
   };
 
-  const handleSendMail = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    playTick(800, 0.02);
+    const next = validate();
+    setErrors(next);
+    if (Object.keys(next).length > 0) return;
+
+    setStatus("sending");
     const subject = encodeURIComponent("[OceanEdge Enquiry]");
     const body = encodeURIComponent(
-      `Name: ${senderName || "Not provided"}\n\nMessage:\n${message}\n`
+      `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}\n`
     );
     window.location.href = `mailto:${directEmail}?subject=${subject}&body=${body}`;
+    window.setTimeout(() => setStatus("ok"), 600);
   };
 
   return (
-    <section
-      id="contact"
-      aria-label="Contact OceanEdge Technologies"
-      className="py-16 sm:py-24 border-b border-[var(--border)] bg-[var(--background)]/85 backdrop-blur-md scroll-mt-12 relative z-10"
-    >
-      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16">
-        {/* Section label */}
-        <div className="pb-4 mb-12 border-b border-[var(--border)]">
-          <span className="text-xs font-mono tracking-widest uppercase text-[var(--text-muted)]">
-            Contact
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left */}
-          <div className="lg:col-span-4 space-y-8">
-            <h2 className="text-3xl sm:text-4xl font-normal tracking-tight text-[var(--foreground)] leading-[1.12]">
-              Talk to us.
+    <section className="section section--mist" id="contact">
+      <div className="container">
+        <div className="contact__grid">
+          {/* Left: details */}
+          <div>
+            <span className="label-pill">Contact</span>
+            <h2 className="section-title" style={{ marginTop: 18 }}>
+              Talk to <span className="accent">us</span>.
             </h2>
-
-            <p className="text-base text-[var(--text-muted)] leading-relaxed">
-              Questions, partnerships, early access. Send a message and we will
+            <p className="section-sub">
+              Questions, partnerships, or early access. Send a message and we will
               reply.
             </p>
 
-            {/* Email */}
-            <div className="flex items-center gap-3">
-              <a
-                href={`mailto:${directEmail}`}
-                className="font-mono text-sm font-semibold text-[var(--foreground)] hover:text-[var(--accent)] transition-colors underline decoration-[var(--border)] underline-offset-4"
-              >
-                {directEmail}
-              </a>
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="p-1.5 border border-[var(--border)] hover:border-[var(--foreground)] text-[var(--foreground)] transition-colors"
-                title="Copy email"
-                aria-label="Copy email address"
-              >
-                {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-              </button>
-            </div>
+            <div className="contact__details">
+              <div className="contact__row">
+                <span className="icon-circle" aria-hidden="true"><Mail size={20} /></span>
+                <span className="t">
+                  <a href={`mailto:${directEmail}`}>{directEmail}</a>
+                </span>
+              </div>
 
-            <div className="text-xs font-mono text-[var(--text-dim)]">
-              Dhaka, Bangladesh · GMT+6
+              {/* TODO: add a verified phone / WhatsApp number for OceanEdge. */}
+              <div className="contact__row">
+                <span className="icon-circle" aria-hidden="true"><MapPin size={20} /></span>
+                <span className="t">Dhaka, Bangladesh · GMT+6</span>
+              </div>
             </div>
           </div>
 
           {/* Right: form */}
-          <div className="lg:col-span-8">
-            <form onSubmit={handleSendMail} className="space-y-6">
-              {/* Name */}
-              <div>
-                <label
-                  htmlFor="contact-name"
-                  className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2"
-                >
-                  Name or organization
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  placeholder="e.g. Samiul / Partner Team"
-                  value={senderName}
-                  onChange={(e) => setSenderName(e.target.value)}
-                  className="w-full px-4 py-3 text-sm bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--foreground)] placeholder:text-[var(--text-dim)] focus:outline-none focus:border-[var(--foreground)] font-mono transition-colors"
-                />
+          <div className="form-card">
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="form-grid">
+                <div className="field">
+                  <label htmlFor="contact-name">Name or organization</label>
+                  <input
+                    id="contact-name"
+                    name="name"
+                    type="text"
+                    placeholder="e.g. Samiul / Partner Team"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "err-name" : undefined}
+                  />
+                  {errors.name && (
+                    <span className="error" id="err-name">{errors.name}</span>
+                  )}
+                </div>
+
+                <div className="field">
+                  <label htmlFor="contact-email">Email</label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "err-email" : undefined}
+                  />
+                  {errors.email && (
+                    <span className="error" id="err-email">{errors.email}</span>
+                  )}
+                </div>
+
+                <div className="field field--full">
+                  <label htmlFor="contact-message">Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={5}
+                    placeholder="What would you like to discuss?"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "err-message" : undefined}
+                  />
+                  {errors.message && (
+                    <span className="error" id="err-message">{errors.message}</span>
+                  )}
+                </div>
               </div>
 
-              {/* Message */}
-              <div>
-                <label
-                  htmlFor="contact-message"
-                  className="block text-[11px] font-mono uppercase tracking-wider text-[var(--text-dim)] mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="contact-message"
-                  required
-                  rows={5}
-                  placeholder="What would you like to discuss?"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="w-full px-4 py-3 text-sm bg-[var(--input-bg)] border border-[var(--input-border)] text-[var(--foreground)] placeholder:text-[var(--text-dim)] focus:outline-none focus:border-[var(--foreground)] font-mono resize-y transition-colors"
-                />
-              </div>
+              <div className="product__actions" style={{ alignItems: "center" }}>
+                <button type="submit" className="btn btn--primary" disabled={status === "sending"}>
+                  <span>{status === "sending" ? "Sending…" : "Send message"}</span>
+                  <Send size={15} aria-hidden="true" />
+                </button>
 
-              <button
-                type="submit"
-                className="inline-flex items-center gap-3 px-6 py-3.5 bg-[var(--foreground)] text-[var(--background)] hover:bg-[var(--accent)] transition-colors text-xs font-mono uppercase tracking-widest font-semibold focus:outline-none focus:ring-2 focus:ring-[var(--accent)] active:translate-y-px"
-              >
-                <span>Send message</span>
-                <Send size={13} />
-              </button>
+                {status === "ok" && (
+                  <span className="form-status form-status--ok" role="status">
+                    Thanks. Your email app is opening to send this message.
+                  </span>
+                )}
+              </div>
             </form>
           </div>
         </div>

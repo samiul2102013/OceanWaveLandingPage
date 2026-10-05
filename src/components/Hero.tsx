@@ -1,108 +1,90 @@
-"use client";
-
-import React from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { playTick } from "@/lib/sound";
-import { ArrowDownRight } from "lucide-react";
+
+const features = [
+  {
+    label: "Trusted Service Providers",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3.5 20a5.5 5.5 0 0 1 11 0" />
+        <path d="M16 5.4a3 3 0 0 1 0 5.9" />
+        <path d="M17.4 14.6a5.5 5.5 0 0 1 3.1 5.4" />
+      </svg>
+    ),
+  },
+  {
+    label: "KYC Verified",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3l7 3v5c0 4.3-2.9 8.1-7 9.2C7.9 19.1 5 15.3 5 11V6l7-3z" />
+        <path d="M9 12l2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Real-time Chat",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 12a8 8 0 0 1-8 8H8l-5 3 1.3-4.3A8 8 0 1 1 21 12z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Secure Payments",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="6" width="18" height="13" rx="2.5" />
+        <path d="M3 10h18" />
+        <circle cx="16.5" cy="14.5" r="1.2" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    label: "Reviews & Ratings",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 3.6l2.6 5.2 5.8.9-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.6 9.7l5.8-.9L12 3.6z" />
+      </svg>
+    ),
+  },
+];
 
 export default function Hero() {
-  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    playTick(800, 0.02);
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section
-      id="hero"
-      aria-label="KaazDaak by OceanEdge Technologies"
-      className="relative border-b border-[var(--border)] bg-gradient-to-b from-kd-mist via-kd-mist to-white overflow-hidden"
-    >
-      <div className="relative w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-16 py-10 sm:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Column: Product messaging */}
-          <div className="lg:col-span-5 flex flex-col">
-            {/* Small Category Label */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 mb-6 border border-kd-navy/15 bg-white/70 text-[11px] font-mono tracking-wider text-kd-navy uppercase self-start">
-              <span className="w-1.5 h-1.5 rounded-none bg-kd-teal" />
-              <span>KAAZDAAK · LOCAL WORK MARKETPLACE</span>
-            </div>
+    <section className="hero" id="hero" aria-label="KaazDaak — আপনার কাজ, আমাদের দায়িত্ব">
+      <div className="hero-text">
+        <h1 className="hero-h1">
+          আপনার কাজ, <span className="accent">আমাদের দায়িত্ব</span>
+        </h1>
+        <p className="hero-sub">বিশ্বস্ত সেবা, দক্ষ মানুষ, এক প্ল্যাটফর্মে</p>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal tracking-tight text-kd-navy leading-[1.06] max-w-2xl">
-              Hire nearby help for everyday jobs.
-            </h1>
+        <ul className="hero-features">
+          {features.map((f) => (
+            <li className="hero-feature" key={f.label}>
+              <span className="ic" aria-hidden="true">{f.icon}</span>
+              <span className="lbl">{f.label}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-            {/* Supporting Copy */}
-            <p className="mt-6 text-base sm:text-lg lg:text-xl text-kd-navy/70 leading-relaxed max-w-xl font-normal">
-              KaazDaak is a local work marketplace for Bangladesh. Post a task,
-              compare offers from workers nearby, hire the one you trust.
-            </p>
-
-            {/* Call to Actions */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-              <Link
-                href="/kaazdaak"
-                onClick={() => playTick(800, 0.02)}
-                className="group inline-flex items-center gap-3 px-5 py-3.5 bg-kd-navy text-white hover:bg-kd-teal transition-colors text-xs font-mono tracking-widest uppercase font-medium focus:outline-none focus:ring-2 focus:ring-kd-teal active:translate-y-px"
-              >
-                <span>Explore KaazDaak</span>
-                <ArrowDownRight
-                  size={16}
-                  className="group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform"
-                />
-              </Link>
-
-              <a
-                href="#contact"
-                onClick={(e) => handleScrollTo(e, "contact")}
-                className="inline-flex items-center gap-2 px-5 py-3.5 border border-kd-navy/25 bg-white/60 hover:bg-white text-kd-navy transition-colors text-xs font-mono tracking-widest uppercase focus:outline-none focus:ring-1 focus:ring-kd-navy active:translate-y-px"
-              >
-                <span>Talk to us</span>
-              </a>
-            </div>
-
-            {/* Product Spec Strip */}
-            <div className="mt-10 pt-6 border-t border-kd-navy/10 grid grid-cols-3 gap-4 text-[11px] font-mono">
-              <div className="space-y-1">
-                <div className="text-kd-navy/50 uppercase text-[10px]">
-                  PRODUCT
-                </div>
-                <div className="text-kd-navy font-medium">KaazDaak</div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-kd-navy/50 uppercase text-[10px]">
-                  MARKET
-                </div>
-                <div className="text-kd-navy font-medium">Bangladesh</div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-kd-navy/50 uppercase text-[10px]">
-                  STATUS
-                </div>
-                <div className="text-kd-navy font-medium">In development</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: KaazDaak hero banner */}
-          <div className="lg:col-span-7">
-            <div className="border border-kd-navy/10 bg-white shadow-sm overflow-hidden">
-              <Image
-                src="/kaazdaak-hero.jpg"
-                alt="KaazDaak app screens with verified service providers and service categories"
-                width={2200}
-                height={1229}
-                priority
-                className="w-full h-auto"
-              />
-            </div>
-          </div>
-        </div>
+      <div className="hero-media">
+        <Image
+          className="hero-phones"
+          src="/images/phones-combined.png"
+          alt="KaazDaak app screens showing service categories and available Kaazbirs"
+          width={1786}
+          height={1904}
+          priority
+        />
+        <Image
+          className="hero-people"
+          src="/images/people.png"
+          alt="Verified KaazDaak service professionals: a technician, an electrician and a cleaner"
+          width={1661}
+          height={947}
+          priority
+        />
       </div>
     </section>
   );

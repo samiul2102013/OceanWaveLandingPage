@@ -1,30 +1,34 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, JetBrains_Mono, Hind_Siliguri } from "next/font/google";
+import { Inter, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-display",
+const inter = Inter({
+  variable: "--font-en",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const hindSiliguri = Hind_Siliguri({
-  variable: "--font-bangla",
-  subsets: ["bengali"],
+  variable: "--font-bn",
+  subsets: ["bengali", "latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "KaazDaak | Local work marketplace for Bangladesh",
+  metadataBase: new URL("https://oceanedgetech.com"),
+  title: "OceanEdge Technologies — Digital products for Bangladesh",
   description:
-    "KaazDaak is a local work marketplace for Bangladesh. Post a task, compare offers from workers nearby, and hire the person you trust. Built by OceanEdge Technologies.",
+    "OceanEdge Technologies is a small product team in Dhaka building KaazDaak, a local work marketplace for Bangladesh.",
+  openGraph: {
+    type: "website",
+    title: "OceanEdge Technologies — Digital products for Bangladesh",
+    description:
+      "Building KaazDaak, a local work marketplace for Bangladesh. Post a task. Hire nearby.",
+    images: ["/images/hero-bg.png"],
+  },
 };
+
+const themeInit = `(function(){try{var t=localStorage.getItem("oe-theme");document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light");}catch(e){document.documentElement.setAttribute("data-theme","light");}})();`;
 
 export default function RootLayout({
   children,
@@ -32,11 +36,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable} ${hindSiliguri.variable} scroll-smooth antialiased`}
-    >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+    <html lang="bn" data-theme="light" className={`${inter.variable} ${hindSiliguri.variable}`}>
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}
       </body>
     </html>

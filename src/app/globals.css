@@ -111,7 +111,7 @@ button { font: inherit; }
   padding-inline: 20px;
 }
 
-#hero, #products, #about, #approach, #contact {
+#hero, #products, #building-now, #about, #approach, #contact {
   scroll-margin-top: calc(var(--header-h) + 12px);
 }
 
@@ -346,7 +346,7 @@ button { font: inherit; }
    ========================================================================== */
 .hero {
   position: relative;
-  min-height: clamp(620px, 78vh, 900px);
+  min-height: max(620px, calc(100svh - var(--header-h)));
   overflow: hidden;
   background: var(--mist) url("/images/hero-bg.png") right bottom / cover no-repeat;
   border-bottom: 1px solid var(--border);
@@ -361,8 +361,22 @@ button { font: inherit; }
   pointer-events: none;
 }
 [data-theme="dark"] .hero::after { background: linear-gradient(to top, var(--navy), rgba(6, 29, 52, 0)); }
+[data-theme="dark"] .hero-oe { background: linear-gradient(180deg, #0A2233 0%, var(--navy-soft) 60%, var(--navy) 100%); }
 
 .hero-media { position: absolute; inset: 0; z-index: 1; }
+
+/* waving Bangladesh flag, drawn over the one baked into hero-bg.png;
+   svg tracks the background cover geometry (see WavingFlag.tsx) */
+.hero-flag {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: block;
+  pointer-events: none;
+}
+
 .hero-phones {
   position: absolute;
   left: 64.5%;
@@ -430,6 +444,80 @@ button { font: inherit; }
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
 }
+
+/* ==========================================================================
+   OceanEdge hero (home route)
+   ========================================================================== */
+.hero-oe {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky) 0%, var(--mist) 55%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(64px, 11vh, 128px) 0 clamp(64px, 10vh, 112px);
+}
+.hero-oe__grid { display: grid; grid-template-columns: 1fr; gap: clamp(36px, 5vw, 64px); align-items: center; }
+.hero-oe__title {
+  margin-top: 18px;
+  font-weight: 800;
+  color: var(--heading);
+  font-size: clamp(2.1rem, 4.6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+.hero-oe__title .accent { color: var(--accent); }
+.hero-oe__sub {
+  margin-top: 18px;
+  max-width: 56ch;
+  color: var(--body);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+}
+.hero-oe__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+
+.hero-oe__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: clamp(22px, 3vw, 30px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform .22s ease, border-color .22s ease;
+}
+.hero-oe__card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.hero-oe__mark {
+  flex: none;
+  width: 78px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--navy);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.hero-oe__mark img { width: 66px; height: auto; }
+.hero-oe__card-body { display: flex; flex-direction: column; gap: 6px; }
+.hero-oe__card-k {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hero-oe__card-t { color: var(--heading); font-weight: 600; font-size: .98rem; line-height: 1.55; }
+.hero-oe__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: .9rem;
+}
+.hero-oe__card-hit { position: absolute; inset: 0; border-radius: inherit; }
+.hero-oe__card-hit:focus-visible { outline-offset: 4px; }
+
 
 /* ==========================================================================
    Ticker
@@ -632,6 +720,8 @@ button { font: inherit; }
 .footer__social li { display: flex; align-items: center; gap: 10px; font-size: .9rem; }
 .footer__social svg { width: 18px; height: 18px; color: var(--aqua); flex: none; }
 .footer__bottom { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; font-size: .82rem; color: var(--text-on-navy-dim); }
+.footer__inline-link { color: var(--aqua); font-weight: 600; }
+.footer__inline-link:hover { text-decoration: underline; }
 
 /* ==========================================================================
    Product extras (spec table, steps, roles, simulator)
@@ -707,7 +797,7 @@ button { font: inherit; }
    Hero below desktop
    ========================================================================== */
 @media (max-width: 1023px) {
-  .hero { min-height: 0; display: block; }
+  .hero { min-height: calc(100svh - var(--header-h)); display: block; }
   .hero-media { position: relative; inset: auto; margin-top: 26px; }
   .hero-phones { position: relative; left: auto; top: auto; width: 80%; margin: 0 auto; animation: none; }
   .hero-people { position: absolute; left: 0; bottom: 0; width: 55%; }
@@ -763,6 +853,8 @@ button { font: inherit; }
   }
 
   .contact__grid { grid-template-columns: 0.85fr 1.15fr; gap: 56px; }
+
+  .hero-oe__grid { grid-template-columns: 1.1fr 0.9fr; }
 
   .form-grid { grid-template-columns: 1fr 1fr; }
 

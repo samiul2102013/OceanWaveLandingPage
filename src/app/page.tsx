@@ -1,8 +1,5 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import AnnouncementTicker from "@/components/AnnouncementTicker";
-import ProductsSection from "@/components/ProductsSection";
-import CurrentFocusSection from "@/components/CurrentFocusSection";
+import OceanEdgeHero from "@/components/OceanEdgeHero";
 import AboutSection from "@/components/AboutSection";
 import ApproachSection from "@/components/ApproachSection";
 import ContactSection from "@/components/ContactSection";
@@ -21,10 +18,7 @@ export default function Home() {
       <Header />
 
       <main id="main">
-        <Hero />
-        <AnnouncementTicker />
-        <ProductsSection />
-        <CurrentFocusSection />
+        <OceanEdgeHero />
         <AboutSection />
         <ApproachSection />
         <ContactSection />

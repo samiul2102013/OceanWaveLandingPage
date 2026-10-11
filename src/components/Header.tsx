@@ -3,13 +3,18 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Sun, Moon } from "lucide-react";
+import { KAADAAK_URL } from "@/lib/links";
 
-const navLinks = [
-  { label: "KaazDaak", href: "#products" },
+type NavLink = { label: string; href: string };
+
+const NAV: NavLink[] = [
+  { label: "KaazDaak", href: KAADAAK_URL },
   { label: "About", href: "#about" },
   { label: "Approach", href: "#approach" },
   { label: "Contact", href: "#contact" },
 ];
+
+const SPY_IDS = ["hero", "about", "approach", "contact"];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -32,10 +37,9 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    const ids = ["hero", "products", "about", "approach", "contact"];
-    const els = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    const els = SPY_IDS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => Boolean(el)
+    );
     if (!els.length || !("IntersectionObserver" in window)) return;
 
     const observer = new IntersectionObserver(
@@ -78,7 +82,7 @@ export default function Header() {
 
         <nav className={`nav${open ? " nav--open" : ""}`} aria-label="Primary">
           <ul className="nav__list">
-            {navLinks.map((link) => {
+            {NAV.map((link) => {
               const isActive = link.href === `#${active}`;
               return (
                 <li key={link.href}>

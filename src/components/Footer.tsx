@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { KAADAAK_URL } from "@/lib/links";
 
 export default function Footer() {
   return (
@@ -7,7 +8,13 @@ export default function Footer() {
         <div className="footer__brand">
           <a className="brand" href="#hero" aria-label="OceanEdge Technologies home">
             <span className="brand__logo">
-              <Image src="/oceanedge-mark.png" alt="" width={44} height={44} loading="lazy" />
+              <Image
+                src="/oceanedge-mark.png"
+                alt=""
+                width={44}
+                height={44}
+                loading="lazy"
+              />
             </span>
             <span className="brand__text">
               <span className="brand__name">
@@ -26,7 +33,6 @@ export default function Footer() {
           <h2 className="footer__heading">Site</h2>
           <ul>
             <li><a href="#hero">Home</a></li>
-            <li><a href="#products">KaazDaak</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#approach">Approach</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -36,8 +42,8 @@ export default function Footer() {
         <div className="footer__col">
           <h2 className="footer__heading">KaazDaak</h2>
           <ul>
-            <li><a href="#products">Product overview</a></li>
-            <li><a href="#products">Watch the video</a></li>
+            <li><a href={KAADAAK_URL}>Explore KaazDaak</a></li>
+            <li><a href={`${KAADAAK_URL}#products`}>See how it works</a></li>
             <li>
               <a href="https://www.kaazdaak.com" target="_blank" rel="noopener">
                 www.kaazdaak.com
@@ -77,7 +83,9 @@ export default function Footer() {
 
       <div className="container footer__bottom">
         <span>© 2026 Ocean Edge Technologies. All rights reserved.</span>
-        <span>KaazDaak is an OceanEdge Technologies product in development.</span>
+        <span>
+          KaazDaak is an OceanEdge Technologies product in development.
+        </span>
       </div>
     </footer>
   );

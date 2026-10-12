@@ -45,8 +45,8 @@ export default function Footer() {
             <li><a href={KAADAAK_URL}>Explore KaazDaak</a></li>
             <li><a href={`${KAADAAK_URL}#products`}>See how it works</a></li>
             <li>
-              <a href="https://www.kaazdaak.com" target="_blank" rel="noopener">
-                www.kaazdaak.com
+              <a href={KAADAAK_URL} target="_blank" rel="noopener">
+                www.kaajdaak.oceanedgetech.com
               </a>
             </li>
           </ul>
@@ -66,7 +66,7 @@ export default function Footer() {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M14 8h2.5V5H14a4 4 0 0 0-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13V9a1 1 0 0 1 1-1z" />
               </svg>
-              <a href="https://www.facebook.com/kaazdaak" target="_blank" rel="noopener">/kaazdaak</a>
+              <a href="https://www.facebook.com/profile.php?id=61591390454825" target="_blank" rel="noopener">Facebook</a>
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

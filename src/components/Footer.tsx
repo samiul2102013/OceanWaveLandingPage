@@ -11,8 +11,8 @@ export default function Footer() {
               <Image
                 src="/oceanedge-mark.png"
                 alt=""
-                width={44}
-                height={44}
+                width={38}
+                height={38}
                 loading="lazy"
               />
             </span>

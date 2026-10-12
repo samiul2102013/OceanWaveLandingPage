@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Mail, MapPin, Send } from "lucide-react";
+import { Send } from "lucide-react";
 
 const directEmail = "ocean.tech.edge@gmail.com";
 
@@ -41,38 +41,39 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="section section--mist" id="contact">
+    <section className="section section--paper" id="contact">
       <div className="container">
         <div className="contact__grid">
-          {/* Left: details */}
-          <div>
-            <span className="label-pill">Contact</span>
-            <h2 className="section-title" style={{ marginTop: 18 }}>
+          <div className="section__head reveal">
+            <p className="mono sec-label">
+              <span className="num">04</span>
+              <span className="rule" />
+              <span>Contact</span>
+            </p>
+            <h2 className="h2 section__title">
               Talk to <span className="accent">us</span>.
             </h2>
-            <p className="section-sub">
+            <p className="lede section__lede">
               Questions, partnerships, or early access. Send a message and we will
               reply.
             </p>
 
-            <div className="contact__details">
+            <div className="contact__rows">
               <div className="contact__row">
-                <span className="icon-circle" aria-hidden="true"><Mail size={20} /></span>
-                <span className="t">
+                <span className="mono">Email</span>
+                <span>
                   <a href={`mailto:${directEmail}`}>{directEmail}</a>
                 </span>
               </div>
-
               {/* TODO: add a verified phone / WhatsApp number for OceanEdge. */}
               <div className="contact__row">
-                <span className="icon-circle" aria-hidden="true"><MapPin size={20} /></span>
-                <span className="t">Dhaka, Bangladesh · GMT+6</span>
+                <span className="mono">Location</span>
+                <span>Dhaka, Bangladesh · GMT+6</span>
               </div>
             </div>
           </div>
 
-          {/* Right: form */}
-          <div className="form-card">
+          <div className="form-card reveal">
             <form onSubmit={handleSubmit} noValidate>
               <div className="form-grid">
                 <div className="field">
@@ -127,7 +128,7 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="product__actions" style={{ alignItems: "center" }}>
+              <div className="form-actions">
                 <button type="submit" className="btn btn--primary" disabled={status === "sending"}>
                   <span>{status === "sending" ? "Sending…" : "Send message"}</span>
                   <Send size={15} aria-hidden="true" />

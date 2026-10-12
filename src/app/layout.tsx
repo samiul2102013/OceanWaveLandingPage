@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Hind_Siliguri } from "next/font/google";
+import { Inter, Hind_Siliguri, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-en",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600"],
 });
 
 const hindSiliguri = Hind_Siliguri({
   variable: "--font-bn",
-  subsets: ["bengali", "latin"],
-  weight: ["400", "500", "600", "700"],
+  subsets: ["bengali"],
+  weight: ["500", "600"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="bn" data-theme="light" className={`${inter.variable} ${hindSiliguri.variable}`}>
+    <html lang="en" data-theme="light" className={`${inter.variable} ${hindSiliguri.variable} ${mono.variable}`}>
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         {children}

@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import OceanEdgeHero from "@/components/OceanEdgeHero";
+import ProductFeature from "@/components/ProductFeature";
 import AboutSection from "@/components/AboutSection";
 import ApproachSection from "@/components/ApproachSection";
 import ContactSection from "@/components/ContactSection";
@@ -19,6 +20,7 @@ export default function Home() {
 
       <main id="main">
         <OceanEdgeHero />
+        <ProductFeature />
         <AboutSection />
         <ApproachSection />
         <ContactSection />
